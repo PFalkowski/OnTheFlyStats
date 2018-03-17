@@ -75,7 +75,7 @@ namespace OnTheFlyStats
             if (value > Max) Max = value;
         }
         /// <summary>
-        /// 
+        /// Sigma distance of actual data from the average
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -84,7 +84,7 @@ namespace OnTheFlyStats
             return (value - Average) / PopulationStandardDeviation;
         }
         /// <summary>
-        /// When the population parameters are known
+        /// Distance from the sample mean to the population mean in units of the standard error. 
         /// </summary>
         /// <param name="sampleMean"></param>
         /// <returns></returns>
