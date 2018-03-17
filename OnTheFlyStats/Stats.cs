@@ -92,31 +92,5 @@ namespace OnTheFlyStats
         {
             return (sampleMean - Average) / StandardError;
         }
-        /// <summary>
-        ///     For sigma = 3.0 => 99% confidence level for parametric distribution and 88.8889% for any distribution due to
-        ///     Chebyshev's inequality. https://en.wikipedia.org/wiki/Confidence_interval
-        /// </summary>
-        //public double UpperConfidenceBound(double sigma = 1.96)
-        //{
-        //    return Average + sigma * StandardError;
-        //}
-        ///// <summary>
-        /////     For sigma = 3.0 => 99% confidence level for parametric distribution and 88.8889% for any distribution due to
-        /////     Chebyshev's inequality. https://en.wikipedia.org/wiki/Confidence_interval
-        ///// </summary>
-        //public double LowerConfidenceBound(double sigma = 1.96)
-        //{
-        //    return Average - sigma * StandardError;
-        //}
-        ///// <summary>
-        /////     https://en.wikipedia.org/wiki/Confidence_interval
-        ///// </summary>
-        ///// <param name="value"></param>
-        ///// <param name="sigma"></param>
-        ///// <returns></returns>
-        //public bool InsideConfidenceBounds(double value, double sigma = 1.96)
-        //{
-        //    return (value >= LowerConfidenceBound(sigma)) && (value <= UpperConfidenceBound(sigma));
-        //}
     }
 }
