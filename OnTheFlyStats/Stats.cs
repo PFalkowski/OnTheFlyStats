@@ -35,7 +35,7 @@ namespace OnTheFlyStats
         /// </summary>
         public double Average { get; private set; }
         /// <summary>
-        ///     Population variance. Assumes we know every value observable in population.
+        ///     Population variance. Assumes knowledge about every sample in population.
         /// </summary>
         public double PopulationVariance => N > 1 ? RawVariance / N : double.NaN;
         /// <summary>
@@ -75,7 +75,7 @@ namespace OnTheFlyStats
             if (value > Max) Max = value;
         }
         /// <summary>
-        /// Sigma distance of actual data from the average
+        /// Sigma distance of actual data from the average. Assumes knowledge about every sample in population and close to normal distribution.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -84,7 +84,7 @@ namespace OnTheFlyStats
             return (value - Average) / PopulationStandardDeviation;
         }
         /// <summary>
-        /// Distance from the sample mean to the population mean in units of the standard error. 
+        /// Distance from the sample mean to the population mean in units of the standard error.  Assumes knowledge about every sample in population and close to normal distribution.
         /// </summary>
         /// <param name="sampleMean"></param>
         /// <returns></returns>

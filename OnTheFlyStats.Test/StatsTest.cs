@@ -136,7 +136,7 @@ namespace OnTheFlyStats.Test
             }
         }
         [Theory]
-        [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, 1, 7, 141234, 15 }, new[] { 1, 1.4142135623731, 1.8171205928321 , 2.0833883178232 , 2.3737128342718 , 2.0552128893597, 1.8542273567859, 2.1891719064564, 7.4935302610235, 8.0320600146762 })]
+        [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, 1, 7, 141234, 15 }, new[] { 1, 1.4142135623731, 1.8171205928321, 2.0833883178232, 2.3737128342718, 2.0552128893597, 1.8542273567859, 2.1891719064564, 7.4935302610235, 8.0320600146762 })]
         public void GeometricAverageReturnsProperResult(double[] input, double[] expected)
         {
             var tested = new Stats();
@@ -146,6 +146,37 @@ namespace OnTheFlyStats.Test
                 Assert.Equal(expected[i], tested.GeometricAverage, 2);
             }
         }
-        
+
+        [Theory]
+        [InlineData(new[] { 1.0, 2, 3, 3.14, -12 }, //, 4, 1, 1, 7, 141234, 15 
+            new[] { 1.0, 1.0, 1.0, 2.0, 0.0 },
+            new[] { double.NaN, -1.0, -1.22475, -0.33049, 0.09921 })]
+        public void ZscoreReturnsProperResult(double[] populationList, double[] sampleList, double[] expectedList)
+        {
+            var tested = new Stats();
+            for (int i = 0; i < populationList.Length; ++i)
+            {
+                tested.Update(populationList[i]);
+                var actual = tested.StandardScore(sampleList[i]);
+                var expected = expectedList[i];
+                Assert.Equal(expected, actual, 2);
+            }
+        }
+
+        [Theory]
+        [InlineData(new[] { 1.0, 2, 3, 3.14, -12 }, //, 4, 1, 1, 7, 141234, 15 
+            new[] { 1.0, 1.0, 1.0, 2.0, 0.0 },
+            new[] { double.NaN, -1.0, -1.22475, -0.33049, 0.09921 })]
+        public void StandardScoreReturnsProperResult(double[] populationList, double[] sampleList, double[] expectedList)
+        {
+            var tested = new Stats();
+            for (int i = 0; i < populationList.Length; ++i)
+            {
+                tested.Update(populationList[i]);
+                var actual = tested.StandardScore(sampleList[i]);
+                var expected = expectedList[i];
+                Assert.Equal(expected, actual, 2);
+            }
+        }
     }
 }
