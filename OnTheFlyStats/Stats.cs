@@ -84,7 +84,7 @@ namespace OnTheFlyStats
             return (value - Average) / PopulationStandardDeviation;
         }
         /// <summary>
-        /// Distance from the sample mean to the population mean in units of the standard error.  Assumes knowledge about every sample in population and close to normal distribution.
+        /// Distance of the sample mean to the population mean in units of the standard error.  Assumes knowledge about every sample in population and close to normal distribution.
         /// </summary>
         /// <param name="sampleMean"></param>
         /// <returns></returns>
