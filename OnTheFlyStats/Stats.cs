@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace OnTheFlyStats
 {
@@ -92,5 +93,7 @@ namespace OnTheFlyStats
         {
             return (sampleMean - Average) / StandardError;
         }
+
+        public override string ToString() => $"Min={Min} Max={Max} μ={Average} N={N}";
     }
 }

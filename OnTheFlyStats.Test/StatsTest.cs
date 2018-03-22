@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,27 @@ namespace OnTheFlyStats.Test
             Assert.True(double.IsNaN(tested.SampleStandardDeviation));
             Assert.True(double.IsNaN(tested.SampleVariance));
             Assert.True(double.IsNaN(tested.StandardError));
+        }
+        [Theory]
+        [InlineData(new[] { 1, 2, 3, 4.0 }, "Min=1 Max=4 μ=2.5 N=4")]
+        public void DisplaysValidInfoInToString(double[] input, string expected)
+        {
+            try
+            {
+                CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+
+                var tested = new Stats();
+                for (int i = 0; i < input.Length; ++i)
+                {
+                    tested.Update(input[i]);
+                }
+                var actual = tested.ToString();
+                Assert.Equal(expected, actual);
+            }
+            finally
+            {
+                CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            }
         }
         [Fact]
         public void NormalizeReturnsNanIfNotEnoughData()

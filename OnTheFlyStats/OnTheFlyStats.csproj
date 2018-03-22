@@ -13,8 +13,8 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.2</Version>
-    <PackageReleaseNotes>changed comments to be more explicit</PackageReleaseNotes>
+    <Version>1.2.0</Version>
+    <PackageReleaseNotes>override ToString() to have more meaning</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
