@@ -1,11 +1,5 @@
-﻿using NSubstitute;
-using OnTheFlyStats.Test.Mocks;
-using System;
-using System.Collections.Generic;
+﻿using OnTheFlyStats.Test.Mocks;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace OnTheFlyStats.Test
