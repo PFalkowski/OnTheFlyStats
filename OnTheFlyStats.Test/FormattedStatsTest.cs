@@ -11,6 +11,13 @@ namespace OnTheFlyStats.Test
     public class FormattedStatsTest
     {
         [Fact]
+        public void DefaultCtorHasProperDefaults()
+        {
+            var tested = new FormattedStats();
+
+            Assert.IsType<OneLineStatsFormatter>(tested.Formatter);
+        }
+        [Fact]
         public void FormatsProperly()
         {
             var formatter = new OneLineStatsFormatter(new InvariantCultureRoundingFormat());
