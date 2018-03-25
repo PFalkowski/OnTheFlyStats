@@ -9,6 +9,11 @@ namespace OnTheFlyStats
     {
         public IFormatProvider NumericFormat { get; set; }
 
+        public OneLineStatsFormatter()
+        {
+            NumericFormat = new InvariantCultureRoundingFormat();
+        }
+
         public OneLineStatsFormatter(IFormatProvider numericFormat)
         {
             NumericFormat = numericFormat;

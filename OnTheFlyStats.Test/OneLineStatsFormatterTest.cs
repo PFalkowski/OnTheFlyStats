@@ -14,19 +14,42 @@ namespace OnTheFlyStats.Test
     {
         [Theory]
         [ClassData(typeof(StatsMock1))]
+        public void DefaultCtorSetsInvariantCultureFormatter(Stats stats)
+        {
+
+            try
+            {
+                CultureInfo.CurrentCulture = CultureInfo.CreateSpecificCulture("PL-pl");
+                var tested = new OneLineStatsFormatter();
+
+                var received = tested.Format(stats);
+
+                Assert.Equal("μ=-14119.89, σ=42371.37, ∑=-141198.86, SEM=14123.79, Min=-141234, Max=15, N=10", received);
+            }
+            finally
+            {
+                CultureInfo.CurrentCulture = CultureInfo.CurrentCulture;
+            }
+        }
+
+        [Theory]
+        [ClassData(typeof(StatsMock1))]
         public void FormatsProperlyWithoutFormatter(Stats stats)
         {
-            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            try
+            {
+                CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
+                var tested = new OneLineStatsFormatter(null);
 
-            var tested = new OneLineStatsFormatter(null);
+                var received = tested.Format(stats);
 
-            var received = tested.Format(stats);
-
-            Assert.Equal("μ=-14119.886, σ=42371.3715441566, ∑=-141198.86, SEM=14123.7905147189, Min=-141234, Max=15, N=10", received);
-
-
-            CultureInfo.CurrentCulture = CultureInfo.CurrentCulture;
+                Assert.Equal("μ=-14119.886, σ=42371.3715441566, ∑=-141198.86, SEM=14123.7905147189, Min=-141234, Max=15, N=10", received);
+            }
+            finally
+            {
+                CultureInfo.CurrentCulture = CultureInfo.CurrentCulture;
+            }
         }
     }
 }

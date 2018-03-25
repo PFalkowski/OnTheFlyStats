@@ -13,8 +13,8 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.0</Version>
-    <PackageReleaseNotes>override ToString() to have more meaning</PackageReleaseNotes>
+    <Version>1.3.0</Version>
+    <PackageReleaseNotes>Add default constructor to FormattedStats</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
