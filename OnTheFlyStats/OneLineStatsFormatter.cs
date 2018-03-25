@@ -3,7 +3,7 @@ using System.Text;
 
 namespace OnTheFlyStats
 {
-    public class OneLineStatsFormatter : IStatsFormatter
+    public class OneLineStatsFormatter : IFormatter<Stats>
     {
         public IFormatProvider NumericFormat { get; set; }
 

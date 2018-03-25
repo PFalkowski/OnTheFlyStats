@@ -4,14 +4,14 @@ namespace OnTheFlyStats
 {
     public class FormattedStats : Stats, IFormattedStats
     {
-        public IStatsFormatter Formatter { get; set; }
+        public IFormatter<Stats> Formatter { get; set; }
 
         public FormattedStats()
         {
             Formatter = new OneLineStatsFormatter(new InvariantCultureRoundingFormat());
         }
 
-        public FormattedStats(IStatsFormatter formatter)
+        public FormattedStats(IFormatter<Stats> formatter)
         {
             if (formatter == null) throw new ArgumentNullException(nameof(formatter));
             Formatter = formatter;
