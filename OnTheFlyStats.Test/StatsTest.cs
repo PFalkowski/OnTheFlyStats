@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Linq;
 using Xunit;
 
 namespace OnTheFlyStats.Test
@@ -206,6 +207,7 @@ namespace OnTheFlyStats.Test
                 tested.Update(input[i]);
                 Assert.Equal(expected[i], tested.Range);
             }
+
         }
     }
 }

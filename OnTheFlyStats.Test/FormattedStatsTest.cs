@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using TextFormatting;
+using Xunit;
 
 namespace OnTheFlyStats.Test
 {
