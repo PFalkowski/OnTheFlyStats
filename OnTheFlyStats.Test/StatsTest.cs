@@ -195,5 +195,17 @@ namespace OnTheFlyStats.Test
                 Assert.Equal(expected, actual, 2);
             }
         }
+        [Theory]
+        [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, -1, 7, -141234, 15 }, new[] { 0.0, 1, 2, 2.14, 3, 3, 5, 8, 141241, 141249})]
+        public void RangeReturnsProperResult(double[] input, double[] expected)
+        {
+            // http://www.sample-size.net/confidence-interval-mean/
+            var tested = new Stats();
+            for (int i = 0; i < input.Length; ++i)
+            {
+                tested.Update(input[i]);
+                Assert.Equal(expected[i], tested.Range);
+            }
+        }
     }
 }

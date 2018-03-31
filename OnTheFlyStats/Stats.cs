@@ -31,7 +31,15 @@ namespace OnTheFlyStats
         /// </summary>
         public double Max { get; private set; } = double.MinValue;
         /// <summary>
-        ///     Mean.
+        ///     The range from the minimum to the maximum. Range = Max - Min.
+        /// </summary>
+        public double Range => Max - Min;
+        /// <summary>
+        /// The average of the min and max of the data. (Max + Min)/2.
+        /// </summary>
+        public double MidRange => (Max + Min) / 2;
+        /// <summary>
+        ///     Arithmetic mean.
         /// </summary>
         public double Average { get; private set; }
         /// <summary>

@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensionsTest.cs" />
     <Compile Include="FormattedStatsTest.cs" />
     <Compile Include="InvariantCultureRoundingFormatTest.cs" />
     <Compile Include="Mocks\StatsMock1.cs" />
