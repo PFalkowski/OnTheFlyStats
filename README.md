@@ -1,5 +1,8 @@
 # OnTheFlyStats
 
+[![NuGet version (OnTheFlyStats)](https://img.shields.io/nuget/v/OnTheFlyStats.svg)](https://www.nuget.org/packages/OnTheFlyStats/)
+[![Licence (OnTheFlyStats)](https://img.shields.io/github/license/mashape/apistatus.svg)](https://choosealicense.com/licenses/mit/)
+
 One pass (O(N)) descriptive statistics including:
 
 - variance
