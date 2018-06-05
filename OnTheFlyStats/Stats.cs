@@ -2,7 +2,7 @@
 
 namespace OnTheFlyStats
 {
-    public class Stats : IUpdatable<double>
+    public class Stats : IUpdatable<double>, IStats
     {
         /// <summary>
         ///     Last value - mean.

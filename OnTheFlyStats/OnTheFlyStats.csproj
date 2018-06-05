@@ -13,8 +13,8 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.0</Version>
-    <PackageReleaseNotes>Add extension method that calculates Stats in one go</PackageReleaseNotes>
+    <Version>2.4.0</Version>
+    <PackageReleaseNotes>Introduce DI friendly interface</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
