@@ -1,7 +1,9 @@
-﻿namespace OnTheFlyStats
+﻿using System;
+
+namespace OnTheFlyStats
 {
-    public interface IUpdatable<T>
+    public interface IUpdatable
     {
-        void Update(T input);
+        void Update<T>(T input) where T : IConvertible;
     }
 }
