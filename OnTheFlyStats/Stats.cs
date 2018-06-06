@@ -66,15 +66,15 @@ namespace OnTheFlyStats
         public double SquareMean { get; private set; }
 
         public double RootMeanSquare => N > 0 ? Math.Sqrt(SquareMean / N) : double.NaN;
-        /// <summary>
-        ///     Call everytime new value is seen.
-        /// </summary>
-        /// <param name="value">observed value</param>
         public void Update<TT>(TT value) where TT : IConvertible
         {
             var converted = Convert.ToDouble(value);
             Update(converted);
         }
+        /// <summary>
+        ///     Call everytime new value is seen.
+        /// </summary>
+        /// <param name="value">observed value</param>
         public void Update(double value)
         {
             ++N;

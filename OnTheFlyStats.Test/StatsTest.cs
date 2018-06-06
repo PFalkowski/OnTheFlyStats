@@ -209,5 +209,19 @@ namespace OnTheFlyStats.Test
             }
 
         }
+        [Theory]
+        [InlineData(new[] { 1.0, 2, 3, 3.14159265359, 4, 1, -1, 7, 141234, 17 }, 
+            new[] { 1.0, 3, 6, 9.14159265359, 13.14159265359, 14.14159265359, 13.14159265359, 20.14159265359, 141254.14159265359, 141271.14159265359 })]
+        public void SumHasRequiredPrecision(double[] input, double[] expected)
+        {
+            var tested = new Stats();
+            for (int i = 0; i < input.Length; ++i)
+            {
+                var currentInput = input[i];
+                var currentExpected = expected[i];
+                tested.Update(currentInput);
+                Assert.Equal(currentExpected, tested.Sum);
+            }
+        }
     }
 }
