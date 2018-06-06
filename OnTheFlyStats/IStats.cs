@@ -1,24 +1,26 @@
-﻿namespace OnTheFlyStats
-{
-    public interface IStats
-    {
-        double Average { get; }
-        double GeometricAverage { get; }
-        double Max { get; }
-        double MidRange { get; }
-        double Min { get; }
-        int N { get; }
-        double PopulationStandardDeviation { get; }
-        double PopulationVariance { get; }
-        double Range { get; }
-        double RootMeanSquare { get; }
-        double SampleStandardDeviation { get; }
-        double SampleVariance { get; }
-        double SquareMean { get; }
-        double StandardError { get; }
-        double Sum { get; }
+﻿using System;
 
-        double StandardScore(double value);
-        double Zscore(double sampleMean);
+namespace OnTheFlyStats
+{
+    public interface IStats<TT> where TT : IConvertible
+    {
+        TT Average { get; }
+        TT GeometricAverage { get; }
+        TT Max { get; }
+        TT MidRange { get; }
+        TT Min { get; }
+        int N { get; }
+        TT PopulationStandardDeviation { get; }
+        TT PopulationVariance { get; }
+        TT Range { get; }
+        TT RootMeanSquare { get; }
+        TT SampleStandardDeviation { get; }
+        TT SampleVariance { get; }
+        TT SquareMean { get; }
+        TT StandardError { get; }
+        TT Sum { get; }
+
+        TT StandardScore(TT value);
+        TT Zscore(TT sampleMean);
     }
 }

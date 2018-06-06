@@ -2,7 +2,7 @@
 
 namespace OnTheFlyStats
 {
-    public class Stats : IUpdatable<double>, IStats
+    public class Stats : IUpdatable<double>, IStats<double>
     {
         /// <summary>
         ///     Last value - mean.
@@ -70,6 +70,11 @@ namespace OnTheFlyStats
         ///     Call everytime new value is seen.
         /// </summary>
         /// <param name="value">observed value</param>
+        public void Update<TT>(TT value) where TT : IConvertible
+        {
+            var converted = Convert.ToDouble(value);
+            Update(converted);
+        }
         public void Update(double value)
         {
             ++N;
