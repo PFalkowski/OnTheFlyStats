@@ -13,8 +13,8 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.0</Version>
-    <PackageReleaseNotes>Introduce DI friendly interface</PackageReleaseNotes>
+    <Version>3.1.0</Version>
+    <PackageReleaseNotes>Add normalize method and constructors</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

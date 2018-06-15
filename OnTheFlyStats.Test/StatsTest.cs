@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
 using System.Linq;
 using Xunit;
+using Extensions;
+using Extensions.Standard;
 
 namespace OnTheFlyStats.Test
 {
@@ -197,7 +199,7 @@ namespace OnTheFlyStats.Test
             }
         }
         [Theory]
-        [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, -1, 7, -141234, 15 }, new[] { 0.0, 1, 2, 2.14, 3, 3, 5, 8, 141241, 141249})]
+        [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, -1, 7, -141234, 15 }, new[] { 0.0, 1, 2, 2.14, 3, 3, 5, 8, 141241, 141249 })]
         public void RangeReturnsProperResult(double[] input, double[] expected)
         {
             // http://www.sample-size.net/confidence-interval-mean/
@@ -207,11 +209,10 @@ namespace OnTheFlyStats.Test
                 tested.Update(input[i]);
                 Assert.Equal(expected[i], tested.Range);
             }
-
         }
         [Theory]
-        [InlineData(new[] { 1.0, 2, 3, 3.14159265359, 4, 1, -1, 7, 141234, 17 }, 
-            new[] { 1.0, 3, 6, 9.14159265359, 13.14159265359, 14.14159265359, 13.14159265359, 20.14159265359, 141254.14159265359, 141271.14159265359 })]
+        [InlineData(new double[] { 1.0, 2, 3, 3.14159265359, 4, 1, -1, 7, 141234, 17 },
+            new double[] { 1.0, 3, 6, 9.14159265359, 13.14159265359, 14.14159265359, 13.14159265359, 20.14159265359, 141254.14159265359, 141271.14159265359 })]
         public void SumHasRequiredPrecision(double[] input, double[] expected)
         {
             var tested = new Stats();
@@ -222,6 +223,31 @@ namespace OnTheFlyStats.Test
                 tested.Update(currentInput);
                 Assert.Equal(currentExpected, tested.Sum);
             }
+        }
+        [Fact]
+        public void GenericUpdateWorks()
+        {
+            decimal[] input = new decimal[] { 1.0m, 2m, 3m, 3.14159265359m, 4m, 1m, -1m, 7m, 141234m, 17m };
+            decimal[] expected = new decimal[] { 1.0m, 3, 6, 9.14159265359m, 13.14159265359m, 14.14159265359m, 13.14159265359m, 20.14159265359m, 141254.14159265359m, 141271.14159265359m };
+            var tested = new Stats();
+            for (int i = 0; i < input.Length; ++i)
+            {
+                var currentInput = input[i];
+                var currentExpected = expected[i];
+                tested.Update(currentInput);
+                Assert.Equal(currentExpected, (decimal)tested.Sum, 5);
+            }
+        }
+        [Fact]
+        public void ScaleScalesProperly()
+        {
+            var input = new double[] { 1, 2, 3, 4, 5 };
+            var tested = new Stats(input);
+            
+            var testValue = 10.0;
+            var expected = 41;
+            var actual = tested.Normalize(testValue);
+            Assert.Equal(expected, actual);
         }
     }
 }

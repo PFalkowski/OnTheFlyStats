@@ -1,9 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OnTheFlyStats
 {
     public class Stats : IUpdatable<double>, IStats<double>
     {
+        public Stats() { }
+        public Stats(IEnumerable<double> input)
+        {
+            foreach (var item in input)
+            {
+                Update(item);
+            }
+        }
         /// <summary>
         ///     Last value - mean.
         /// </summary>
@@ -104,6 +113,17 @@ namespace OnTheFlyStats
         public double Zscore(double sampleMean)
         {
             return (sampleMean - Average) / StandardError;
+        }
+        /// <summary>
+        /// Scale to this statistic min and max values.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public double Normalize(double value)
+        {
+            var scaleMin = Min;
+            var scaleMax = Max;
+            return scaleMin + value * (scaleMax -  scaleMin);
         }
 
         public override string ToString() => $"Min={Min} Max={Max} μ={Average} N={N}";
