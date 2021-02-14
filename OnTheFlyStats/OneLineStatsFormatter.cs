@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StandardInterfaces;
+using System;
 using System.Text;
 using TextFormatting;
 

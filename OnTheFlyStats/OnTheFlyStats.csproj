@@ -4,21 +4,22 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Piotr Falkowski</Authors>
     <Company>Piotr Falkowski</Company>
-    <Description>Do you find yourself adding numbers to the collection and recalculating mean each time? This package is intended to solve the issue. The statistics are always ready and calculating mean for next element does not require iterating over whole collection. On-the-fly calculation of mean, variance, standard deviation, ZScore, sum, min, max and more supported.</Description>
-    <Copyright>Piotr Falkowski © 2018</Copyright>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <Description>Do you find yourself adding numbers to the collection and recalculating mean each time? This package is intended to solve the issue. The statistics are always ready and calculating mean for next element does not require iterating over whole collection. On-the-fly calculation of mean, variance, standard deviation, ZScore, sum, min, max and more supported. Create Confusion Matrixes using ReceiverOperatorCharacteristic class, that will calculate Accuracy etc. on the fly.</Description>
+    <Copyright>Piotr Falkowski © 2021</Copyright>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>statistics, on-the-fly, eager, O(N), average, mean, variance, standardDeviation, population, sample</PackageTags>
     <PackageId>OnTheFlyStats</PackageId>
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.1.0</Version>
-    <PackageReleaseNotes>Add normalize method and constructors</PackageReleaseNotes>
+    <Version>3.2.0</Version>
+    <PackageReleaseNotes>Add ReceiverOperatorCharacteristic</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TextFormatting" Version="1.0.0" />
+    <PackageReference Include="StandardInterfaces" Version="2.0.0" />
+    <PackageReference Include="TextFormatting" Version="2.0.0" />
   </ItemGroup>
 
 </Project>
