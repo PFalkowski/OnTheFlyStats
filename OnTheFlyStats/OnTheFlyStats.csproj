@@ -15,6 +15,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>3.2.0</Version>
     <PackageReleaseNotes>Add ReceiverOperatorCharacteristic</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
