@@ -153,14 +153,5 @@ namespace OnTheFlyStats.Test
             // Assert
             Assert.Equal(.666666666666666, tested.Specificity, 10);
         }
-
-        [Fact]
-        public void SpecificityIsCorrect()
-        {
-            var tested = new ReceiverOperatorCharacteristic(_expectedList, _resultsList);
-
-            // Assert
-            Assert.Equal(.666666666666666, tested.Specificity, 10);
-        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using TextFormatting;
 
 namespace OnTheFlyStats
 {
@@ -126,6 +128,21 @@ namespace OnTheFlyStats
             return scaleMin + value * (scaleMax -  scaleMin);
         }
 
-        public override string ToString() => $"Min={Min} Max={Max} μ={Average} N={N}";
+        public override string ToString()
+        {
+            var numericFormat = new InvariantCultureRoundingFormat();
+            var stb = new StringBuilder();
+
+            stb.AppendFormat(numericFormat, "μ={0}, ", Average);
+            stb.AppendFormat(numericFormat, "Min={0}, ", Min);
+            stb.AppendFormat(numericFormat, "Max={0}, ", Max);
+            stb.AppendFormat(numericFormat, "∑={0}, ", Sum);
+            stb.AppendFormat(numericFormat, "N={0}", N);
+            stb.AppendFormat(numericFormat, "σ={0}, ", PopulationStandardDeviation);
+            stb.AppendFormat(numericFormat, "σ²={0}, ", PopulationVariance);
+            stb.AppendFormat(numericFormat, "SEM={0}, ", StandardError);
+
+            return stb.ToString();
+        }
     }
 }
