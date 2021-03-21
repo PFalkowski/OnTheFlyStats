@@ -137,7 +137,7 @@ namespace OnTheFlyStats
             stb.AppendFormat(numericFormat, "Min={0}, ", Min);
             stb.AppendFormat(numericFormat, "Max={0}, ", Max);
             stb.AppendFormat(numericFormat, "∑={0}, ", Sum);
-            stb.AppendFormat(numericFormat, "N={0}", N);
+            stb.AppendFormat(numericFormat, "N={0}, ", N);
             stb.AppendFormat(numericFormat, "σ={0}, ", PopulationStandardDeviation);
             stb.AppendFormat(numericFormat, "σ²={0}, ", PopulationVariance);
             stb.AppendFormat(numericFormat, "SEM={0}, ", StandardError);
