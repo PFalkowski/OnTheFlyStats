@@ -13,12 +13,14 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.3.0</Version>
-    <PackageReleaseNotes>Add ReceiverOperatorCharacteristic</PackageReleaseNotes>
+    <Version>3.4.0</Version>
+    <PackageReleaseNotes>Now Stats can be properly serialized and deserialized using Newtonsoft.JSON</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <UserSecretsId>21a6ced2-bed4-4e99-8fe4-0176b289630f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="StandardInterfaces" Version="2.0.0" />
     <PackageReference Include="TextFormatting" Version="2.0.0" />
   </ItemGroup>

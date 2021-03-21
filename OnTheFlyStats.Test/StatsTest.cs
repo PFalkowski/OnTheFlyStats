@@ -4,6 +4,7 @@ using System.Linq;
 using Xunit;
 using Extensions;
 using Extensions.Standard;
+using Newtonsoft.Json;
 
 namespace OnTheFlyStats.Test
 {
@@ -260,7 +261,7 @@ namespace OnTheFlyStats.Test
                 Assert.Equal(currentExpected, (decimal)tested.Sum, 5);
             }
         }
-
+        
         [Fact]
         public void ScaleScalesProperly()
         {
@@ -271,6 +272,21 @@ namespace OnTheFlyStats.Test
             var expected = 41;
             var actual = tested.Normalize(testValue);
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void CanSerializeAndDeserialize()
+        {
+            // Arrange
+            var input = new double[] { 1, 2, 3, 4, 5 };
+            var tested = new Stats(input);
+
+            // Act
+            var serialized = JsonConvert.SerializeObject(tested);
+            var deserialized = JsonConvert.DeserializeObject<Stats>(serialized);
+
+            // Assert
+            Assert.Equal(tested.ToString(), deserialized.ToString());
         }
     }
 }
