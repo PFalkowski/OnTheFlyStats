@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using StandardInterfaces;
 
 namespace OnTheFlyStats
@@ -42,70 +43,89 @@ namespace OnTheFlyStats
         }
 
         [DisplayName("True Positives")]
+        [JsonProperty]
         public int TruePositives { get; private set; }
 
         [DisplayName("True Negatives")]
+        [JsonProperty]
         public int TrueNegatives { get; private set; }
 
         [DisplayName("False Positives")]
+        [JsonProperty]
         public int FalsePositives { get; private set; }
 
         [DisplayName("False Negatives")]
+        [JsonProperty]
         public int FalseNegatives { get; private set; }
-
+        
+        [JsonIgnore]
         public int ActualPositives => TruePositives + FalseNegatives;
-
+        
+        [JsonIgnore]
         public int ActualNegatives => TrueNegatives + FalsePositives;
-
+        
+        [JsonIgnore]
         public int All => ActualPositives + ActualNegatives;
-
+        
+        [JsonIgnore]
         public int PredictedPositives => TruePositives + FalsePositives;
-
+        
+        [JsonIgnore]
         public int PredictedNegatives => TrueNegatives + FalseNegatives;
 
         /// <summary>
         ///     True Positive Rate (hit rate, recall)(TPR)
         /// </summary>
+        [JsonIgnore]
         public double Sensitivity =>
             TruePositives == 0 ? 0 : (double)TruePositives / ActualPositives;
 
         /// <summary>
         ///     Positive Predictive Value (PPV)
         /// </summary>
+        [JsonIgnore]
         public double Precision =>
             TruePositives == 0 ? 0 : (double)TruePositives / PredictedPositives;
 
         /// <summary>
         ///     True Negative Rate (SPC)
         /// </summary>
+        [JsonIgnore]
         public double Specificity =>
             TrueNegatives == 0 ? 0 : (double)TrueNegatives / ActualNegatives;
 
         /// <summary>
         ///     Average of Sensitivity and Specificity
         /// </summary>
+        [JsonIgnore]
         public double Efficiency => (Sensitivity + Specificity) / 2.0;
 
         /// <summary>
         ///     System Performance (ACC)
         /// </summary>
+        [JsonIgnore]
         public double Accuracy =>
             All == 0 ? 0 : (double)(TruePositives + TrueNegatives) / All;
 
         /// <summary>
         ///     How common is a positive result in data.
         /// </summary>
+        [JsonIgnore]
         public double Prevalence =>
             All == 0 ? 0 : (double)ActualPositives / All;
-
+        
+        [JsonIgnore]
         public double PositivePredictiveValue =>
             PredictedPositives == 0 ? 1.0 : (double)TruePositives / PredictedPositives;
-
+        
+        [JsonIgnore]
         public double NegativePredictiveValue =>
             PredictedNegatives == 0 ? 1.0 : (double)TrueNegatives / PredictedNegatives;
-
+        
+        [JsonIgnore]
         public double FalsePositiveRate => (double)FalsePositives / ActualNegatives;
-
+        
+        [JsonIgnore]
         public double FalseDiscoveryRate =>
             PredictedPositives == 0 ? 1.0 : (double)FalsePositives / PredictedPositives;
 

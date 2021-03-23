@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace OnTheFlyStats.Test
@@ -144,7 +145,7 @@ namespace OnTheFlyStats.Test
             // Assert
             Assert.Equal(.25, tested.Sensitivity, 10);
         }
-
+        
         [Fact]
         public void SpecificityIsCorrect()
         {
@@ -152,6 +153,23 @@ namespace OnTheFlyStats.Test
 
             // Assert
             Assert.Equal(.666666666666666, tested.Specificity, 10);
+        }
+
+        [Fact]
+        public void CanSerializeAndDeserialize()
+        {
+            // Arrange
+            var tested = new ReceiverOperatorCharacteristic(_expectedList, _resultsList);
+
+            // Act
+            var serialized = JsonConvert.SerializeObject(tested);
+            var deserialized = JsonConvert.DeserializeObject<ReceiverOperatorCharacteristic>(serialized);
+
+            var expected = tested.ToString();
+            var actual = deserialized.ToString();
+
+            // Assert
+            Assert.Equal(expected, actual);
         }
     }
 }

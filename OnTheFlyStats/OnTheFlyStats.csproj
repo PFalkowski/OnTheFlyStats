@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.4.0</Version>
+    <Version>3.5.0</Version>
     <PackageReleaseNotes>Now Stats can be properly serialized and deserialized using Newtonsoft.JSON</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <UserSecretsId>21a6ced2-bed4-4e99-8fe4-0176b289630f</UserSecretsId>

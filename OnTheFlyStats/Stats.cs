@@ -175,7 +175,7 @@ namespace OnTheFlyStats
             stb.AppendFormat(numericFormat, "N={0}\t", N);
             stb.AppendFormat(numericFormat, "σ={0}\t", PopulationStandardDeviation);
             stb.AppendFormat(numericFormat, "σ²={0}\t", PopulationVariance);
-            stb.AppendFormat(numericFormat, "SEM={0}\t", StandardError);
+            stb.AppendFormat(numericFormat, "SEM={0}", StandardError);
 
             return stb.ToString();
         }
