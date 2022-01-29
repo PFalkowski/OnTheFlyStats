@@ -288,5 +288,33 @@ namespace OnTheFlyStats.Test
             // Assert
             Assert.Equal(tested.ToString(), deserialized.ToString());
         }
+
+        [Fact]
+        public void PrettyPrintPrintsPretty()
+        {
+            // Arrange
+            var input = new double[] { 1, 2, 3, 4, 5 };
+            var tested = new Stats(input);
+
+            // Act
+            var prettyPrinted = tested.PrettyPrint();
+            var expected = @"
+************************************************************
+*        Descriptive statistics calculation result          
+*-----------------------------------------------------------
+Average                         3
+Min                             1
+Max                             5
+Sum                             15
+N                               5
+Population standard deviation   1,4142135623731
+Population variance             2
+Standard error of the mean      0,707106781186548
+************************************************************
+";
+
+            // Assert
+            Assert.Equal(expected, prettyPrinted);
+        }
     }
 }

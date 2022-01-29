@@ -23,5 +23,7 @@ namespace OnTheFlyStats
         TT StandardScore(TT value);
         TT Zscore(TT sampleMean);
         TT Normalize(TT value);
+
+        string PrettyPrint();
     }
 }

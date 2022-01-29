@@ -179,5 +179,25 @@ namespace OnTheFlyStats
 
             return stb.ToString();
         }
+
+        public string PrettyPrint()
+        {
+            var stb = new StringBuilder();
+            stb.AppendLine();
+            stb.AppendLine($"************************************************************");
+            stb.AppendLine($"*        Descriptive statistics calculation result          ");
+            stb.AppendLine($"*-----------------------------------------------------------");
+            stb.AppendLine($"Average                         {Average}");
+            stb.AppendLine($"Min                             {Min}");
+            stb.AppendLine($"Max                             {Max}");
+            stb.AppendLine($"Sum                             {Sum}");
+            stb.AppendLine($"N                               {N}");
+            stb.AppendLine($"Population standard deviation   {PopulationStandardDeviation}");
+            stb.AppendLine($"Population variance             {PopulationVariance}");
+            stb.AppendLine($"Standard error of the mean      {StandardError}");
+            stb.AppendLine($"************************************************************");
+
+            return stb.ToString();
+        }
     }
 }

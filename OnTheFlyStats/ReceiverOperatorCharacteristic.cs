@@ -137,12 +137,12 @@ namespace OnTheFlyStats
                    FalseNegatives == other.FalseNegatives;
         }
 
-        public void Activate(bool expected, bool actual)
+        public void Activate(bool real, bool predicted)
         {
-            if (expected && actual) ++TruePositives;
-            else if (!expected && !actual) ++TrueNegatives;
-            else if (!expected && actual) ++FalsePositives;
-            else ++FalseNegatives;
+            if (real && predicted) ++TruePositives;
+            else if (!real && !predicted) ++TrueNegatives;
+            else if (!real && predicted) ++FalsePositives;
+            else if (real && !predicted) ++FalseNegatives;
         }
 
         /// <summary>

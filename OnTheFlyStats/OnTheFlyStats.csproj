@@ -5,7 +5,7 @@
     <Authors>Piotr Falkowski</Authors>
     <Company>Piotr Falkowski</Company>
     <Description>Do you find yourself adding numbers to the collection and recalculating mean each time? This package is intended to solve the issue. The statistics are always ready and calculating mean for next element does not require iterating over whole collection. On-the-fly calculation of mean, variance, standard deviation, ZScore, sum, min, max and more supported. Create Confusion Matrixes using ReceiverOperatorCharacteristic class, that will calculate Accuracy etc. on the fly.</Description>
-    <Copyright>Piotr Falkowski © 2021</Copyright>
+    <Copyright>Piotr Falkowski © 2022</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>statistics, on-the-fly, eager, O(N), average, mean, variance, standardDeviation, population, sample</PackageTags>
@@ -13,8 +13,8 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.5.0</Version>
-    <PackageReleaseNotes>Now Stats can be properly serialized and deserialized using Newtonsoft.JSON</PackageReleaseNotes>
+    <Version>4.1.0</Version>
+    <PackageReleaseNotes>The argument names for ROC were confusing - now they are replaced with 'real' and 'predicted' names. Add PrettyPrint() to Stats.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <UserSecretsId>21a6ced2-bed4-4e99-8fe4-0176b289630f</UserSecretsId>
   </PropertyGroup>
