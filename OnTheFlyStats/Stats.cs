@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Extensions.Standard;
 using Newtonsoft.Json;
 using TextFormatting;
 
@@ -180,13 +182,15 @@ namespace OnTheFlyStats
             return stb.ToString();
         }
 
-        public string PrettyPrint()
+        public string PrettyPrint(string title = "Descriptive statistics calculation result", int lineLength = 60)
         {
             var stb = new StringBuilder();
+            string stars = new string('*', lineLength);
+            string dashes = new string('-', lineLength - 1);
             stb.AppendLine();
-            stb.AppendLine($"************************************************************");
-            stb.AppendLine($"*        Descriptive statistics calculation result          ");
-            stb.AppendLine($"*-----------------------------------------------------------");
+            stb.AppendLine(stars);
+            stb.AppendLine($"*{title.CenterText(lineLength)}");
+            stb.AppendLine($"*{dashes}");
             stb.AppendLine($"Average                         {Average}");
             stb.AppendLine($"Min                             {Min}");
             stb.AppendLine($"Max                             {Max}");
@@ -195,7 +199,7 @@ namespace OnTheFlyStats
             stb.AppendLine($"Population standard deviation   {PopulationStandardDeviation}");
             stb.AppendLine($"Population variance             {PopulationVariance}");
             stb.AppendLine($"Standard error of the mean      {StandardError}");
-            stb.AppendLine($"************************************************************");
+            stb.AppendLine(stars);
 
             return stb.ToString();
         }

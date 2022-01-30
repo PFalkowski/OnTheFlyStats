@@ -300,16 +300,16 @@ namespace OnTheFlyStats.Test
             var prettyPrinted = tested.PrettyPrint();
             var expected = @"
 ************************************************************
-*        Descriptive statistics calculation result          
+*         Descriptive statistics calculation result         
 *-----------------------------------------------------------
 Average                         3
 Min                             1
 Max                             5
 Sum                             15
 N                               5
-Population standard deviation   1,4142135623731
+Population standard deviation   1,4142135623730951
 Population variance             2
-Standard error of the mean      0,707106781186548
+Standard error of the mean      0,7071067811865476
 ************************************************************
 ";
 

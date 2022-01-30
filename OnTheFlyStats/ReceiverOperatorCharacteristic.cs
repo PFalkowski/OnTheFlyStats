@@ -151,9 +151,9 @@ namespace OnTheFlyStats
         /// <param name="expected">Value predicted by the model.</param>
         /// <param name="actual">Value from the data.</param>
         /// <param name="threshold"></param>
-        public virtual void Activate(double expected, double actual, double threshold = 0.5)
+        public virtual void Activate(double real, double predicted, double threshold = 0.5)
         {
-            Activate(expected > threshold, actual > threshold);
+            Activate(real > threshold, predicted > threshold);
         }
 
         public override string ToString()
