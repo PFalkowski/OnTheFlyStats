@@ -13,14 +13,14 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.1.0</Version>
-    <PackageReleaseNotes>The argument names for ROC were confusing - now they are replaced with 'real' and 'predicted' names. Add PrettyPrint() to Stats.</PackageReleaseNotes>
+    <Version>5.0.0</Version>
+    <PackageReleaseNotes>Migrate project to .NET Standard 2.1. Rename parameters of Activate() method. Enhance the PrettyPrint feature with optional lenght and title parameters to allow customization</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <UserSecretsId>21a6ced2-bed4-4e99-8fe4-0176b289630f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Extensions.Standard" Version="6.1.0" />
+    <PackageReference Include="Extensions.Standard" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="StandardInterfaces" Version="3.1.0" />
     <PackageReference Include="TextFormatting" Version="2.0.0" />
