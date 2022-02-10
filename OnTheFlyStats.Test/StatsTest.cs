@@ -113,6 +113,22 @@ namespace OnTheFlyStats.Test
         }
 
         [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public void NreturnsCount2(int repetitions)
+        {
+            var tested = new Stats();
+            for (int i = 0; i < repetitions; ++i)
+            {
+                tested.Update(i);
+            }
+            Assert.Equal(repetitions, tested.N);
+        }
+
+        [Theory]
         [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, -1, 7, -141234, 15 }, new[] { double.NaN, 0.5, 0.816496580928, 0.862365931609, 1.03224803221, 1.1207388436, 1.56725159149, 2.24045614775, 44386.3552838, 42371.3715442 })]
         public void PopulationStandardDevReturnsProperResult(double[] input, double[] expected)
         {
