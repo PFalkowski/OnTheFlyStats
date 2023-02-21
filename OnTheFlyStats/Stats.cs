@@ -25,18 +25,25 @@ namespace OnTheFlyStats
         private double Delta { get; set; }
 
         /// <summary>
-        ///     Variance * N
+        ///     Variance * Count
         /// </summary>
         [JsonProperty]
         private double RawVariance { get; set; }
         
         [JsonProperty]
         private double LogSum { get; set; }
+
         /// <summary>
         ///     Number of samples.
         /// </summary>
         [JsonProperty]
-        public int N { get; private set; }
+        public int Count { get; private set; }
+
+        /// <summary>
+        ///     Number of samples.
+        /// </summary>
+        [JsonProperty]
+        public int N => Count;
 
         /// <summary>
         ///     Sum of all samples.
@@ -60,8 +67,15 @@ namespace OnTheFlyStats
         ///     Arithmetic mean.
         /// </summary>
         [JsonProperty]
-        public double Average { get; private set; }
-        
+        [Obsolete("Use Mean")]
+        public double Average => Mean;
+
+        /// <summary>
+        ///     Arithmetic mean.
+        /// </summary>
+        [JsonProperty]
+        public double Mean { get; private set; }
+
         [JsonProperty]
         public double SquareMean { get; private set; }
         
@@ -81,34 +95,42 @@ namespace OnTheFlyStats
         ///     Population variance. Assumes knowledge about every sample in population.
         /// </summary>
         [JsonIgnore]
-        public double PopulationVariance => N > 1 ? RawVariance / N : double.NaN;
+        public double PopulationVariance => Count > 1 ? RawVariance / Count : double.NaN;
 
         /// <summary>
-        ///     Population variance estimate based on sample.
+        ///     Sample variance, or to be exact, population variance estimate based on sample.
         /// </summary>
         [JsonIgnore]
-        public double SampleVariance => N > 1 ? RawVariance / (N - 1) : double.NaN;
+        public double Variance => Count > 1 ? RawVariance / (Count - 1) : double.NaN;
+
+        [Obsolete]
+        [JsonIgnore]
+        public double SampleVariance => Variance;
 
         /// <summary>
         ///     Standard deviation.
         /// </summary>
         [JsonIgnore]
-        public double PopulationStandardDeviation => N > 1 ? Math.Sqrt(PopulationVariance) : double.NaN;
+        public double PopulationStandardDeviation => Count > 1 ? Math.Sqrt(PopulationVariance) : double.NaN;
 
         /// <summary>
         ///     Standard deviation estimate.
         /// </summary>
         [JsonIgnore]
-        public double SampleStandardDeviation => N > 1 ? Math.Sqrt(SampleVariance) : double.NaN;
+        public double StandardDeviation => Count > 1 ? Math.Sqrt(Variance) : double.NaN;
+
+        [Obsolete]
+        [JsonIgnore]
+        public double SampleStandardDeviation => Variance;
+
+        [JsonIgnore]
+        public double StandardError => Count > 1 ? StandardDeviation / Math.Sqrt(Count) : double.NaN;
         
         [JsonIgnore]
-        public double StandardError => N > 1 ? SampleStandardDeviation / Math.Sqrt(N) : double.NaN;
+        public double GeometricAverage => Count > 0 ? Math.Exp(LogSum / Count) : double.NaN;
         
         [JsonIgnore]
-        public double GeometricAverage => N > 0 ? Math.Exp(LogSum / N) : double.NaN;
-        
-        [JsonIgnore]
-        public double RootMeanSquare => N > 0 ? Math.Sqrt(SquareMean / N) : double.NaN;
+        public double RootMeanSquare => Count > 0 ? Math.Sqrt(SquareMean) : double.NaN;
 
         public void Update<TT>(TT value) where TT : IConvertible
         {
@@ -122,13 +144,13 @@ namespace OnTheFlyStats
         /// <param name="value">observed value</param>
         public void Update(double value)
         {
-            ++N;
+            ++Count;
             Sum += value;
-            Delta = value - Average;
-            Average += Delta / N;
-            RawVariance += Delta * (value - Average);
+            Delta = value - Mean;
+            Mean += Delta / Count;
+            RawVariance += Delta * (value - Mean);
             LogSum += Math.Log(value);
-            SquareMean += (value * value - SquareMean) / N;
+            SquareMean += (value * value - SquareMean) / Count;
             if (value < Min) Min = value;
             if (value > Max) Max = value;
         }
@@ -140,7 +162,7 @@ namespace OnTheFlyStats
         /// <returns></returns>
         public double StandardScore(double value)
         {
-            return (value - Average) / PopulationStandardDeviation;
+            return (value - Mean) / PopulationStandardDeviation;
         }
 
         /// <summary>
@@ -150,7 +172,7 @@ namespace OnTheFlyStats
         /// <returns></returns>
         public double Zscore(double sampleMean)
         {
-            return (sampleMean - Average) / StandardError;
+            return (sampleMean - Mean) / StandardError;
         }
 
         /// <summary>
@@ -170,11 +192,11 @@ namespace OnTheFlyStats
             var numericFormat = new InvariantCultureRoundingFormat();
             var stb = new StringBuilder();
 
-            stb.AppendFormat(numericFormat, "μ={0}\t", Average);
+            stb.AppendFormat(numericFormat, "μ={0}\t", Mean);
             stb.AppendFormat(numericFormat, "Min={0}\t", Min);
             stb.AppendFormat(numericFormat, "Max={0}\t", Max);
             stb.AppendFormat(numericFormat, "∑={0}\t", Sum);
-            stb.AppendFormat(numericFormat, "N={0}\t", N);
+            stb.AppendFormat(numericFormat, "N={0}\t", Count);
             stb.AppendFormat(numericFormat, "σ={0}\t", PopulationStandardDeviation);
             stb.AppendFormat(numericFormat, "σ²={0}\t", PopulationVariance);
             stb.AppendFormat(numericFormat, "SEM={0}", StandardError);
@@ -191,11 +213,11 @@ namespace OnTheFlyStats
             stb.AppendLine(stars);
             stb.AppendLine($"*{title.CenterText(lineLength)}");
             stb.AppendLine($"*{dashes}");
-            stb.AppendLine($"Average                         {Average}");
+            stb.AppendLine($"Average                         {Mean}");
             stb.AppendLine($"Min                             {Min}");
             stb.AppendLine($"Max                             {Max}");
             stb.AppendLine($"Sum                             {Sum}");
-            stb.AppendLine($"N                               {N}");
+            stb.AppendLine($"Count                           {Count}");
             stb.AppendLine($"Population standard deviation   {PopulationStandardDeviation}");
             stb.AppendLine($"Population variance             {PopulationVariance}");
             stb.AppendLine($"Standard error of the mean      {StandardError}");

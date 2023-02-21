@@ -17,7 +17,7 @@ namespace OnTheFlyStats.Test
             Assert.Equal(input.Length, result.N);
             Assert.Equal(min, result.Min);
             Assert.Equal(max, result.Max);
-            Assert.Equal(variance, result.SampleVariance, 2);
+            Assert.Equal(variance, result.Variance, 2);
         }
     }
 }

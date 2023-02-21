@@ -23,7 +23,7 @@ namespace OnTheFlyStats
         {
             var stb = new StringBuilder();
 
-            stb.AppendFormat(NumericFormat, "μ={0}, ", stats.Average);
+            stb.AppendFormat(NumericFormat, "μ={0}, ", stats.Mean);
             stb.AppendFormat(NumericFormat, "σ={0}, ", stats.PopulationStandardDeviation);
             //stb.AppendFormat(NumericFormat, "σ²={0}, ", stats.PopulationVariance);
             stb.AppendFormat(NumericFormat, "∑={0}, ", stats.Sum);

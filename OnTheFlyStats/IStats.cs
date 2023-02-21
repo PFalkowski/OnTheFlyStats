@@ -4,7 +4,7 @@ namespace OnTheFlyStats
 {
     public interface IStats<TT> where TT : IConvertible
     {
-        TT Average { get; }
+        TT Mean { get; }
         TT GeometricAverage { get; }
         TT Max { get; }
         TT MidRange { get; }
@@ -14,8 +14,8 @@ namespace OnTheFlyStats
         TT PopulationVariance { get; }
         TT Range { get; }
         TT RootMeanSquare { get; }
-        TT SampleStandardDeviation { get; }
-        TT SampleVariance { get; }
+        TT StandardDeviation { get; }
+        TT Variance { get; }
         TT SquareMean { get; }
         TT StandardError { get; }
         TT Sum { get; }

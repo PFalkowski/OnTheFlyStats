@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 
 namespace OnTheFlyStats.Test
 {
+    /// <summary>
+    /// https://www.calculatorsoup.com/calculators/statistics/variance-calculator.php
+    /// </summary>
     public class StatsTest
     {
         [Fact]
@@ -27,8 +30,8 @@ namespace OnTheFlyStats.Test
             Assert.Equal(0, tested.N);
             Assert.True(double.IsNaN(tested.PopulationStandardDeviation));
             Assert.True(double.IsNaN(tested.PopulationVariance));
-            Assert.True(double.IsNaN(tested.SampleStandardDeviation));
-            Assert.True(double.IsNaN(tested.SampleVariance));
+            Assert.True(double.IsNaN(tested.StandardDeviation));
+            Assert.True(double.IsNaN(tested.Variance));
             Assert.True(double.IsNaN(tested.StandardError));
         }
 
@@ -46,7 +49,7 @@ namespace OnTheFlyStats.Test
                     tested.Update(input[i]);
                 }
                 var actual = tested;
-                Assert.Contains($"μ={Math.Round(actual.Average, 1)}", actual.ToString());
+                Assert.Contains($"μ={Math.Round(actual.Mean, 1)}", actual.ToString());
                 Assert.Contains($"N={actual.N}", actual.ToString());
                 Assert.Contains($"Min={Math.Round(actual.Min, 1)}", actual.ToString());
                 Assert.Contains($"Max={Math.Round(actual.Max, 1)}", actual.ToString());
@@ -129,6 +132,20 @@ namespace OnTheFlyStats.Test
         }
 
         [Theory]
+        [InlineData(new[] { 1.0, 2, 3, 4, 5 }, new[] { double.NaN, 0.25, 0.66666667, 1.25, 2 })]
+        [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, -1, 7, -141234, 15 },
+            new[] { double.NaN, 0.25, 0.66666667, 0.743675, 1.065536, 1.2560556, 2.4562776, 5.0196438, 1970148535.37, 1795333126.53 })]
+        public void PopulationVarianceReturnsProperResult(double[] input, double[] expected)
+        {
+            var tested = new Stats();
+            for (int i = 0; i < input.Length; ++i)
+            {
+                tested.Update(input[i]);
+                Assert.Equal(expected[i], tested.PopulationVariance, 1);
+            }
+        }
+
+        [Theory]
         [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, -1, 7, -141234, 15 }, new[] { double.NaN, 0.5, 0.816496580928, 0.862365931609, 1.03224803221, 1.1207388436, 1.56725159149, 2.24045614775, 44386.3552838, 42371.3715442 })]
         public void PopulationStandardDevReturnsProperResult(double[] input, double[] expected)
         {
@@ -141,6 +158,7 @@ namespace OnTheFlyStats.Test
         }
 
         [Theory]
+        [InlineData(new[] { 1.0, 2, 3, 4, 5 }, new[] { double.NaN, 0.5, 1, 1.6666667, 2.5 })]
         [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, -1, 7, -141234, 15 }, new[] { double.NaN, 0.5, 1, 0.991566666667, 1.33192, 1.50726666667, 2.86565714286, 5.73673571429, 2216417102.3, 1994814585.04 })]
         public void SampleVarianceReturnsProperResult(double[] input, double[] expected)
         {
@@ -148,20 +166,52 @@ namespace OnTheFlyStats.Test
             for (int i = 0; i < input.Length; ++i)
             {
                 tested.Update(input[i]);
-                Assert.Equal(expected[i], tested.SampleVariance, 1);
+                Assert.Equal(expected[i], tested.Variance, 1);
             }
         }
 
         [Theory]
-        [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, -1, 7, -141234, 15 }, new[] { double.NaN, 0.707106781187, 1, 0.995774405509, 1.15408838483, 1.22770789142, 1.6928251956, 2.39514836999, 47078.83922, 44663.3472216 })]
+        [InlineData(new[] { 1.0, 2, 3, 3.14, 4, 1, -1, 7, -141234, 15 }, new[] { double.NaN, 0.70711, 1, 0.995774405509, 1.15408838483, 1.22770789142, 1.6928251956, 2.39514836999, 47078.83922, 44663.3472216 })]
         public void SampleStandardDevReturnsProperResult(double[] input, double[] expected)
         {
             var tested = new Stats();
             for (int i = 0; i < input.Length; ++i)
             {
                 tested.Update(input[i]);
-                Assert.Equal(expected[i], tested.SampleStandardDeviation, 5);
+                Assert.Equal(expected[i], tested.StandardDeviation, 5);
             }
+        }
+
+        [Theory]
+        [InlineData(new[] { 1.0 }, 1)]
+        [InlineData(new[] { 1.0, 2 }, 1.581138830)]
+        [InlineData(new[] { 1.0, 2, 3 }, 2.160246900)]
+        [InlineData(new[] { 1.0, 2, 3, 4 }, 2.738612787)]
+        [InlineData(new[] { 1.0, 2, 3, 4, 5 }, 3.316624790)]
+        public void RootMeanSquare_ShouldReturnCorrectRootMeanSquare(double[] input, double expected)
+        {
+            var tested = new Stats();
+            for (int i = 0; i < input.Length; ++i)
+            {
+                tested.Update(input[i]);
+            }
+            Assert.Equal(expected, tested.RootMeanSquare, 5);
+        }
+
+        [Theory]
+        [InlineData(new[] { 1.0 }, 1)]
+        [InlineData(new[] { 1.0, 2 }, 1.414213562373)]
+        [InlineData(new[] { 1.0, 2, 3 }, 1.817120592832)]
+        [InlineData(new[] { 1.0, 2, 3, 4 }, 2.213363839401)]
+        [InlineData(new[] { 1.0, 2, 3, 4, 5 }, 2.605171084697)]
+        public void GeometricAverage_ShouldReturnCorrectGeometricAverage(double[] input, double expected)
+        {
+            var tested = new Stats();
+            for (int i = 0; i < input.Length; ++i)
+            {
+                tested.Update(input[i]);
+            }
+            Assert.Equal(expected, tested.GeometricAverage, 5);
         }
 
         [Theory]
@@ -172,7 +222,7 @@ namespace OnTheFlyStats.Test
             for (int i = 0; i < input.Length; ++i)
             {
                 tested.Update(input[i]);
-                Assert.Equal(expected[i], tested.Average, 5);
+                Assert.Equal(expected[i], tested.Mean, 5);
             }
         }
 
@@ -277,7 +327,7 @@ namespace OnTheFlyStats.Test
                 Assert.Equal(currentExpected, (decimal)tested.Sum, 5);
             }
         }
-        
+
         [Fact]
         public void ScaleScalesProperly()
         {
@@ -322,7 +372,7 @@ Average                         3
 Min                             1
 Max                             5
 Sum                             15
-N                               5
+Count                           5
 Population standard deviation   1,4142135623730951
 Population variance             2
 Standard error of the mean      0,7071067811865476
