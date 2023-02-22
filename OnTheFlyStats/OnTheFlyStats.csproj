@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>Piotr Falkowski</Authors>
     <Company>Piotr Falkowski</Company>
     <Description>Do you find yourself adding numbers to the collection and recalculating mean each time? This package is intended to solve the issue. The statistics are always ready and calculating mean for next element does not require iterating over whole collection. On-the-fly calculation of mean, variance, standard deviation, ZScore, sum, min, max and more supported. Create Confusion Matrixes using ReceiverOperatorCharacteristic class, that will calculate Accuracy etc. on the fly.</Description>
-    <Copyright>Piotr Falkowski © 2022</Copyright>
+    <Copyright>Piotr Falkowski © 2023</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>statistics, on-the-fly, eager, O(N), average, mean, variance, standardDeviation, population, sample</PackageTags>
@@ -13,8 +13,8 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>5.0.0</Version>
-    <PackageReleaseNotes>Migrate project to .NET Standard 2.1. Rename parameters of Activate() method. Enhance the PrettyPrint feature with optional lenght and title parameters to allow customization</PackageReleaseNotes>
+    <Version>6.0.0</Version>
+    <PackageReleaseNotes>Migrate project to .NET 6.0. Rename Properties. N -&gt; Count. Sample statistics by default (no Sample prefix/sufix)</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <UserSecretsId>21a6ced2-bed4-4e99-8fe4-0176b289630f</UserSecretsId>
   </PropertyGroup>
