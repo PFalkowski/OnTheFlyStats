@@ -24,8 +24,8 @@ namespace OnTheFlyStats.Test
         public void HasProperDefaultValues()
         {
             var tested = new Stats();
-            Assert.Equal(double.MinValue, tested.Max);
-            Assert.Equal(double.MaxValue, tested.Min);
+            Assert.True(double.IsNaN(tested.Max));
+            Assert.True(double.IsNaN(tested.Min));
             Assert.Equal(0, tested.Sum);
             Assert.Equal(0, tested.N);
             Assert.True(double.IsNaN(tested.PopulationStandardDeviation));

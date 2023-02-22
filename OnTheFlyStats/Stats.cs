@@ -55,13 +55,13 @@ namespace OnTheFlyStats
         ///     Minimal observed value across all samples.
         /// </summary>
         [JsonProperty]
-        public double Min { get; private set; } = double.MaxValue;
+        public double Min { get; private set; } = double.NaN;
 
         /// <summary>
         ///     Maximal observed value across all samples.
         /// </summary>
         [JsonProperty]
-        public double Max { get; private set; } = double.MinValue;
+        public double Max { get; private set; } = double.NaN;
 
         /// <summary>
         ///     Arithmetic mean.
@@ -151,8 +151,8 @@ namespace OnTheFlyStats
             RawVariance += Delta * (value - Mean);
             LogSum += Math.Log(value);
             SquareMean += (value * value - SquareMean) / Count;
-            if (value < Min) Min = value;
-            if (value > Max) Max = value;
+            if (value < Min || double.IsNaN(Min)) Min = value;
+            if (value > Max || double.IsNaN(Max)) Max = value;
         }
 
         /// <summary>
