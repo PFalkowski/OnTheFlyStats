@@ -49,8 +49,8 @@ namespace OnTheFlyStats.Test
                     tested.Update(input[i]);
                 }
                 var actual = tested;
-                Assert.Contains($"μ={Math.Round(actual.Mean, 1)}", actual.ToString());
-                Assert.Contains($"N={actual.N}", actual.ToString());
+                Assert.Contains($"Mean={Math.Round(actual.Mean, 1)}", actual.ToString());
+                Assert.Contains($"n={actual.N}", actual.ToString());
                 Assert.Contains($"Min={Math.Round(actual.Min, 1)}", actual.ToString());
                 Assert.Contains($"Max={Math.Round(actual.Max, 1)}", actual.ToString());
             }
@@ -368,14 +368,14 @@ namespace OnTheFlyStats.Test
 ************************************************************
 *         Descriptive statistics calculation result         
 *-----------------------------------------------------------
-Average                         3
+Mean                            3
 Min                             1
 Max                             5
 Sum                             15
 Count                           5
-Population standard deviation   1,4142135623730951
-Population variance             2
-Standard error of the mean      0,7071067811865476
+Standard deviation              1,4142135623730951
+Variance                        2
+Standard error                  0,7071067811865476
 ************************************************************
 ";
 

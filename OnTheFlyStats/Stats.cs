@@ -18,20 +18,15 @@ namespace OnTheFlyStats
                 Update(item);
             }
         }
-        /// <summary>
-        ///     Last value - mean.
-        /// </summary>
-        [JsonProperty]
-        private double Delta { get; set; }
-
+        
         /// <summary>
         ///     Variance * Count
         /// </summary>
         [JsonProperty]
         private double RawVariance { get; set; }
-        
+
         [JsonProperty]
-        private double LogSum { get; set; }
+        public double LogSum { get; private set; }
 
         /// <summary>
         ///     Number of samples.
@@ -103,7 +98,7 @@ namespace OnTheFlyStats
         [JsonIgnore]
         public double Variance => Count > 1 ? RawVariance / (Count - 1) : double.NaN;
 
-        [Obsolete]
+        [Obsolete("Use Variance")]
         [JsonIgnore]
         public double SampleVariance => Variance;
 
@@ -146,9 +141,9 @@ namespace OnTheFlyStats
         {
             ++Count;
             Sum += value;
-            Delta = value - Mean;
-            Mean += Delta / Count;
-            RawVariance += Delta * (value - Mean);
+            var delta = value - Mean;
+            Mean += delta / Count;
+            RawVariance += delta * (value - Mean);
             LogSum += Math.Log(value);
             SquareMean += (value * value - SquareMean) / Count;
             if (value < Min || double.IsNaN(Min)) Min = value;
@@ -156,23 +151,53 @@ namespace OnTheFlyStats
         }
 
         /// <summary>
-        /// Sigma distance of actual data from the average. Assumes knowledge about every sample in population and close to normal distribution.
+        /// Sigma distance of sample average from the population average.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public double StandardScore(double value)
+        /// <param name="sampleMean">Arithmetic mean of the sample</param>
+        /// <returns></returns> 
+        public double StandardScoreSample(double sampleMean)
         {
-            return (value - Mean) / PopulationStandardDeviation;
+            return (sampleMean - Mean) / StandardError;
         }
 
         /// <summary>
-        /// Distance of the sample mean to the population mean in units of the standard error.
+        /// Distance of the <paramref name="sampleMean"/> to the population mean in units of the standard error.
         /// </summary>
         /// <param name="sampleMean"></param>
         /// <returns></returns>
+        [Obsolete($"Use {nameof(StandardScore)}(double sampleMean, int sampleSize)")]
         public double Zscore(double sampleMean)
         {
             return (sampleMean - Mean) / StandardError;
+        }
+
+        /// <summary>
+        /// Standard score, most commonly called Z-score. Z-score of a single data point <paramref name="x"/>.
+        /// The difference of the raw data score minus the population mean, divided by the population standard deviation.
+        /// Sigma (standard deviation) distance of single data point from the population average.
+        /// Assumes normal distribution and knowledge about whole population.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public double StandardScore(double x)
+        {
+            return (x - Mean) / PopulationStandardDeviation;
+        }
+
+        /// <summary>
+        /// Z-score of a sample with known population standard deviation.
+        /// the sample mean minus the population mean,
+        /// divided by the Standard Error of the Mean for a Population which is the population standard deviation divided by the square root of the sample size
+        /// Standard score, most commonly called Z-score. 
+        /// Sigma (standard deviation) distance of single data point from the population average.
+        /// Assumes normal distribution and knowledge about whole population.
+        /// </summary>
+        /// <param name="sampleMean"></param>
+        /// <param name="sampleSize"></param>
+        /// <returns></returns>
+        public double StandardScore(double sampleMean, int sampleSize)
+        {
+            return (sampleMean - Mean) / (PopulationStandardDeviation / Math.Sqrt(sampleSize));
         }
 
         /// <summary>
@@ -192,35 +217,36 @@ namespace OnTheFlyStats
             var numericFormat = new InvariantCultureRoundingFormat();
             var stb = new StringBuilder();
 
-            stb.AppendFormat(numericFormat, "μ={0}\t", Mean);
+            stb.AppendFormat(numericFormat, "Mean={0}\t", Mean);
             stb.AppendFormat(numericFormat, "Min={0}\t", Min);
             stb.AppendFormat(numericFormat, "Max={0}\t", Max);
-            stb.AppendFormat(numericFormat, "∑={0}\t", Sum);
-            stb.AppendFormat(numericFormat, "N={0}\t", Count);
-            stb.AppendFormat(numericFormat, "σ={0}\t", PopulationStandardDeviation);
-            stb.AppendFormat(numericFormat, "σ²={0}\t", PopulationVariance);
+            stb.AppendFormat(numericFormat, "Sum={0}\t", Sum);
+            stb.AppendFormat(numericFormat, "n={0}\t", Count);
+            stb.AppendFormat(numericFormat, "Sd={0}\t", StandardDeviation);
+            stb.AppendFormat(numericFormat, "Sd²={0}\t", Variance);
             stb.AppendFormat(numericFormat, "SEM={0}", StandardError);
 
             return stb.ToString();
         }
 
-        public string PrettyPrint(string title = "Descriptive statistics calculation result", int lineLength = 60)
+        public string PrettyPrint(string title = "Descriptive statistics calculation result",
+            int lineLength = 60)
         {
             var stb = new StringBuilder();
-            string stars = new string('*', lineLength);
-            string dashes = new string('-', lineLength - 1);
+            var stars = new string('*', lineLength);
+            var dashes = new string('-', lineLength - 1);
             stb.AppendLine();
             stb.AppendLine(stars);
             stb.AppendLine($"*{title.CenterText(lineLength)}");
             stb.AppendLine($"*{dashes}");
-            stb.AppendLine($"Average                         {Mean}");
+            stb.AppendLine($"Mean                            {Mean}");
             stb.AppendLine($"Min                             {Min}");
             stb.AppendLine($"Max                             {Max}");
             stb.AppendLine($"Sum                             {Sum}");
             stb.AppendLine($"Count                           {Count}");
-            stb.AppendLine($"Population standard deviation   {PopulationStandardDeviation}");
-            stb.AppendLine($"Population variance             {PopulationVariance}");
-            stb.AppendLine($"Standard error of the mean      {StandardError}");
+            stb.AppendLine($"Standard deviation              {PopulationStandardDeviation}");
+            stb.AppendLine($"Variance                        {PopulationVariance}");
+            stb.AppendLine($"Standard error                  {StandardError}");
             stb.AppendLine(stars);
 
             return stb.ToString();

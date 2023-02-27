@@ -19,7 +19,6 @@ namespace OnTheFlyStats
         TT SquareMean { get; }
         TT StandardError { get; }
         TT Sum { get; }
-
         TT StandardScore(TT value);
         TT Zscore(TT sampleMean);
         TT Normalize(TT value);

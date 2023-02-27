@@ -8,7 +8,7 @@ namespace OnTheFlyStats
     {
         public static Stats Stats<T>(this IEnumerable<T> input) where T : IConvertible
         {
-            Stats result = new Stats();
+            var result = new Stats();
             foreach (var item in input)
             {
                 var converted = Convert.ToDouble(item);
