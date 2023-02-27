@@ -151,16 +151,6 @@ namespace OnTheFlyStats
         }
 
         /// <summary>
-        /// Sigma distance of sample average from the population average.
-        /// </summary>
-        /// <param name="sampleMean">Arithmetic mean of the sample</param>
-        /// <returns></returns> 
-        public double StandardScoreSample(double sampleMean)
-        {
-            return (sampleMean - Mean) / StandardError;
-        }
-
-        /// <summary>
         /// Distance of the <paramref name="sampleMean"/> to the population mean in units of the standard error.
         /// </summary>
         /// <param name="sampleMean"></param>
@@ -176,6 +166,7 @@ namespace OnTheFlyStats
         /// The difference of the raw data score minus the population mean, divided by the population standard deviation.
         /// Sigma (standard deviation) distance of single data point from the population average.
         /// Assumes normal distribution and knowledge about whole population.
+        /// https://www.calculatorsoup.com/calculators/statistics/z-score-calculator.php
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
@@ -191,6 +182,7 @@ namespace OnTheFlyStats
         /// Standard score, most commonly called Z-score. 
         /// Sigma (standard deviation) distance of single data point from the population average.
         /// Assumes normal distribution and knowledge about whole population.
+        /// https://www.calculatorsoup.com/calculators/statistics/z-score-calculator.php
         /// </summary>
         /// <param name="sampleMean"></param>
         /// <param name="sampleSize"></param>
