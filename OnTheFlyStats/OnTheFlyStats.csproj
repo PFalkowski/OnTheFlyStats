@@ -13,14 +13,14 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>6.0.0</Version>
-    <PackageReleaseNotes>Migrate project to .NET 6.0. Rename Properties. N -&gt; Count. Sample statistics by default (no Sample prefix/sufix)</PackageReleaseNotes>
+    <Version>6.1.1</Version>
+    <PackageReleaseNotes>Update NuGets</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <UserSecretsId>21a6ced2-bed4-4e99-8fe4-0176b289630f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Extensions.Standard" Version="7.0.0" />
+    <PackageReference Include="Extensions.Standard" Version="8.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="StandardInterfaces" Version="3.1.0" />
     <PackageReference Include="TextFormatting" Version="2.0.0" />

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Extensions.Standard;
+﻿using Extensions.Standard;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using TextFormatting;
 
 namespace OnTheFlyStats
@@ -15,7 +14,7 @@ namespace OnTheFlyStats
         {
             foreach (var item in input)
             {
-                Update(item);
+                UpdateInternal(item);
             }
         }
         
@@ -127,17 +126,23 @@ namespace OnTheFlyStats
         [JsonIgnore]
         public double RootMeanSquare => Count > 0 ? Math.Sqrt(SquareMean) : double.NaN;
 
-        public void Update<TT>(TT value) where TT : IConvertible
+        public virtual void Update<TT>(TT value) where TT : IConvertible
         {
             var converted = Convert.ToDouble(value);
-            Update(converted);
+            UpdateInternal(converted);
+        }
+
+        public virtual void Update(double value)
+        {
+            UpdateInternal(value);
         }
 
         /// <summary>
+        ///     Add observation to this statistics.
         ///     Call every time new value is seen.
         /// </summary>
         /// <param name="value">observed value</param>
-        public void Update(double value)
+        protected void UpdateInternal(double value)
         {
             ++Count;
             Sum += value;
