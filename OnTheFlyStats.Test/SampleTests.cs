@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace OnTheFlyStats.Test;
@@ -48,5 +49,25 @@ public class SampleTests
         // Assert
         Assert.Single(sample.InternalSample);
         Assert.Equal(value, sample.InternalSample[0]);
+    }
+
+    [Fact]
+    public void Update_AddsValueToInternalSample_ByConvertibleMethod()
+    {
+        // Arrange
+        var sample = new Sample();
+        IConvertible value1 = 5.0;
+        IConvertible value2 = 3.0;
+        IConvertible value3 = 7.0;
+
+        // Act
+        sample.Update(value1);
+        sample.Update(value2);
+        sample.Update(value3);
+
+        // Assert
+        Assert.Equal(value1, sample.InternalSample[0]);
+        Assert.Equal(value2, sample.InternalSample[1]);
+        Assert.Equal(value3, sample.InternalSample[2]);
     }
 }

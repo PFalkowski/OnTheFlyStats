@@ -126,10 +126,10 @@ namespace OnTheFlyStats
         [JsonIgnore]
         public double RootMeanSquare => Count > 0 ? Math.Sqrt(SquareMean) : double.NaN;
 
-        public virtual void Update<TT>(TT value) where TT : IConvertible
+        public void Update<TT>(TT value) where TT : IConvertible
         {
             var converted = Convert.ToDouble(value);
-            UpdateInternal(converted);
+            Update(converted);
         }
 
         public virtual void Update(double value)
