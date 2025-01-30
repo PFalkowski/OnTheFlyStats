@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Authors>Piotr Falkowski</Authors>
     <Company>Piotr Falkowski</Company>
-    <Description>Do you find yourself adding numbers to the collection and recalculating mean each time? This package is intended to solve the issue. The statistics are always ready and calculating mean for next element does not require iterating over whole collection. On-the-fly calculation of mean, variance, standard deviation, ZScore, sum, min, max and more supported. Create Confusion Matrixes using ReceiverOperatorCharacteristic class, that will calculate Accuracy etc. on the fly.</Description>
+    <Description>Do you find yourself adding numbers to the collection and recalculating mean each time? This package is intended to solve the issue. By computing the base terms with each new observation, the retrieval of statistics at any time is O(1). The statistics are always ready and calculating mean for next element does not require iterating over whole collection. On-the-fly calculation of mean, variance, standard deviation, ZScore, sum, min, max and more supported. Create Confusion Matrixes using ReceiverOperatorCharacteristic class, that will calculate Accuracy etc. on the fly.</Description>
     <Copyright>Piotr Falkowski © 2023</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>statistics, on-the-fly, eager, O(N), average, mean, variance, standardDeviation, population, sample</PackageTags>
+    <PackageTags>statistics, on-line algorithm, on-the-fly, eager, O(N), O(1), average, mean, variance, standardDeviation, population, sample</PackageTags>
     <PackageId>OnTheFlyStats</PackageId>
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
