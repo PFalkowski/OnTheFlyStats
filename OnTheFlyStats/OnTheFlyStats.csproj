@@ -13,8 +13,8 @@
     <PackageProjectUrl>https://github.com/PFalkowski/OnTheFlyStats</PackageProjectUrl>
     <RepositoryUrl>https://github.com/PFalkowski/OnTheFlyStats</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>6.2.1</Version>
-    <PackageReleaseNotes>Fix Update&lt;TT&gt; method in Stats class to use potentially overriden method Update(), not updateInternal, which resulted in InternalSample not beeing updated for Samples.</PackageReleaseNotes>
+    <Version>7.0.0</Version>
+    <PackageReleaseNotes>Reset() capability for Stats.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <UserSecretsId>21a6ced2-bed4-4e99-8fe4-0176b289630f</UserSecretsId>
   </PropertyGroup>

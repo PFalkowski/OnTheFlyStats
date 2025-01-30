@@ -209,6 +209,18 @@ namespace OnTheFlyStats
             return scaleMin + value * (scaleMax - scaleMin);
         }
 
+        public void Reset()
+        {
+            Count = 0;
+            Sum = 0;
+            LogSum = 0;
+            RawVariance = 0;
+            Mean = 0;
+            SquareMean = 0;
+            Min = double.NaN;
+            Max = double.NaN;
+        }
+
         public override string ToString()
         {
             var numericFormat = new InvariantCultureRoundingFormat();

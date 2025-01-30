@@ -22,6 +22,7 @@ namespace OnTheFlyStats
         TT StandardScore(TT value);
         TT Zscore(TT sampleMean);
         TT Normalize(TT value);
+        void Reset();
 
         string PrettyPrint(string title = "Descriptive statistics calculation result", int lineLength = 60);
     }

@@ -382,5 +382,50 @@ Standard error                  0,7071067811865476
             // Assert
             Assert.Equal(expected, prettyPrinted);
         }
+
+        [Fact]
+        public void Reset_ShouldSetAllValuesToInitialState()
+        {
+            // Arrange
+            var stats = new Stats(new[] { 1.0, 2.0, 3.0, 4.0, 5.0 });
+
+            // Act
+            stats.Reset();
+
+            // Assert
+            Assert.Equal(0, stats.Count);
+            Assert.Equal(0, stats.Sum);
+            Assert.Equal(0, stats.LogSum);
+            Assert.Equal(0, stats.Mean);
+            Assert.Equal(0, stats.SquareMean);
+            Assert.True(double.IsNaN(stats.Min));
+            Assert.True(double.IsNaN(stats.Max));
+            Assert.True(double.IsNaN(stats.Variance));
+            Assert.True(double.IsNaN(stats.StandardDeviation));
+            Assert.True(double.IsNaN(stats.PopulationVariance));
+            Assert.True(double.IsNaN(stats.PopulationStandardDeviation));
+            Assert.True(double.IsNaN(stats.GeometricAverage));
+            Assert.True(double.IsNaN(stats.RootMeanSquare));
+            Assert.True(double.IsNaN(stats.StandardError));
+        }
+
+        [Fact]
+        public void Reset_ShouldAllowNewUpdatesAfterReset()
+        {
+            // Arrange
+            var stats = new Stats(new[] { 1.0, 2.0, 3.0 });
+
+            // Act
+            stats.Reset();
+            stats.Update(10.0);
+            stats.Update(20.0);
+
+            // Assert
+            Assert.Equal(2, stats.Count);
+            Assert.Equal(30.0, stats.Sum);
+            Assert.Equal(15.0, stats.Mean);
+            Assert.Equal(10.0, stats.Min);
+            Assert.Equal(20.0, stats.Max);
+        }
     }
 }
