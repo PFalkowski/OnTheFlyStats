@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace OnTheFlyStats
 {
@@ -24,6 +25,6 @@ namespace OnTheFlyStats
         TT Normalize(TT value);
         void Reset();
 
-        string PrettyPrint(string title = "Descriptive statistics calculation result", int lineLength = 60);
+        string PrettyPrint(string title = "Descriptive statistics calculation result", int lineLength = 60, CultureInfo culture = null);
     }
 }

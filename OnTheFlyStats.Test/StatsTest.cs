@@ -364,22 +364,20 @@ namespace OnTheFlyStats.Test
 
             // Act
             var prettyPrinted = tested.PrettyPrint();
-            const string expected = """
-
-                                    ************************************************************
-                                    *         Descriptive statistics calculation result         
-                                    *-----------------------------------------------------------
-                                    Mean                            3
-                                    Min                             1
-                                    Max                             5
-                                    Sum                             15
-                                    Count                           5
-                                    Standard deviation              1,4142135623730951
-                                    Variance                        2
-                                    Standard error                  0,7071067811865476
-                                    ************************************************************
-
-                                    """;
+            const string expected = @"
+************************************************************
+*         Descriptive statistics calculation result         
+*-----------------------------------------------------------
+Mean                            3
+Min                             1
+Max                             5
+Sum                             15
+Count                           5
+Standard deviation              1.4142135623730951
+Variance                        2
+Standard error                  0.7071067811865476
+************************************************************
+";
 
             // Assert
             Assert.Equal(expected, prettyPrinted);

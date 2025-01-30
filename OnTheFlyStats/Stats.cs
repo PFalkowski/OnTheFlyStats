@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using TextFormatting;
 
@@ -239,7 +240,7 @@ namespace OnTheFlyStats
         }
 
         public string PrettyPrint(string title = "Descriptive statistics calculation result",
-            int lineLength = 60)
+            int lineLength = 60, CultureInfo culture = null)
         {
             var stb = new StringBuilder();
             var stars = new string('*', lineLength);
@@ -248,14 +249,14 @@ namespace OnTheFlyStats
             stb.AppendLine(stars);
             stb.AppendLine($"*{title.CenterText(lineLength)}");
             stb.AppendLine($"*{dashes}");
-            stb.AppendLine($"Mean                            {Mean}");
-            stb.AppendLine($"Min                             {Min}");
-            stb.AppendLine($"Max                             {Max}");
-            stb.AppendLine($"Sum                             {Sum}");
-            stb.AppendLine($"Count                           {Count}");
-            stb.AppendLine($"Standard deviation              {PopulationStandardDeviation}");
-            stb.AppendLine($"Variance                        {PopulationVariance}");
-            stb.AppendLine($"Standard error                  {StandardError}");
+            stb.AppendLine($"Mean                            {Mean.ToString(culture ?? CultureInfo.InvariantCulture)}");
+            stb.AppendLine($"Min                             {Min.ToString(culture ?? CultureInfo.InvariantCulture)}");
+            stb.AppendLine($"Max                             {Max.ToString(culture ?? CultureInfo.InvariantCulture)}");
+            stb.AppendLine($"Sum                             {Sum.ToString(culture ?? CultureInfo.InvariantCulture)}");
+            stb.AppendLine($"Count                           {Count.ToString(culture ?? CultureInfo.InvariantCulture)}");
+            stb.AppendLine($"Standard deviation              {PopulationStandardDeviation.ToString(culture ?? CultureInfo.InvariantCulture)}");
+            stb.AppendLine($"Variance                        {PopulationVariance.ToString(culture ?? CultureInfo.InvariantCulture)}");
+            stb.AppendLine($"Standard error                  {StandardError.ToString(culture ?? CultureInfo.InvariantCulture)}");
             stb.AppendLine(stars);
 
             return stb.ToString();
