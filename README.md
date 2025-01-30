@@ -2,7 +2,7 @@
 
 [![NuGet version (OnTheFlyStats)](https://img.shields.io/nuget/v/OnTheFlyStats.svg)](https://www.nuget.org/packages/OnTheFlyStats/)
 [![Licence (OnTheFlyStats)](https://img.shields.io/github/license/mashape/apistatus.svg)](https://choosealicense.com/licenses/mit/)
-[![.NET Build and Test](https://github.com/PFalkowski/OnTheFlyStats/actions/workflows/dotnet.yml/badge.svg)](https://github.com/{owner}/{repo}/actions/workflows/dotnet.yml)
+[![.NET Build and Test](https://github.com/PFalkowski/OnTheFlyStats/actions/workflows/dotnet.yml/badge.svg)](https://github.com/PFalkowski/OnTheFlyStats/actions/workflows/dotnet.yml)
 
 One pass (O(N)) descriptive statistics including:
 
