@@ -373,7 +373,7 @@ Min                             1
 Max                             5
 Sum                             15
 Count                           5
-Standard deviation              1,4142135623730951
+Standard deviation              1.4142135623730951
 Variance                        2
 Standard error                  0.7071067811865476
 ************************************************************
