@@ -32,6 +32,8 @@ jobs:
       - name: Install dotnet-coverage
         run: dotnet tool install --global dotnet-coverage
       - name: SonarCloud begin
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           dotnet sonarscanner begin \
             /k:"PFalkowski_OnTheFlyStats" \
@@ -44,4 +46,6 @@ jobs:
       - name: Collect coverage
         run: dotnet-coverage collect "dotnet test" -f xml -o coverage.xml
       - name: SonarCloud end
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
