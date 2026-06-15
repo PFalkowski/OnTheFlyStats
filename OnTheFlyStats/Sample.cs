@@ -5,7 +5,7 @@ namespace OnTheFlyStats
 {
     public class Sample : Stats
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public List<double> InternalSample { get; set; } = new();
 
         public Sample() { }

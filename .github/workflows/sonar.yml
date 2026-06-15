@@ -1,0 +1,47 @@
+name: SonarCloud
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+      - name: Setup Java (required by SonarScanner)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+      - name: Install dotnet-sonarscanner
+        run: dotnet tool install --global dotnet-sonarscanner
+      - name: Install dotnet-coverage
+        run: dotnet tool install --global dotnet-coverage
+      - name: SonarCloud begin
+        run: |
+          dotnet sonarscanner begin \
+            /k:"PFalkowski_OnTheFlyStats" \
+            /o:"pfalkowski" \
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}" \
+            /d:sonar.host.url="https://sonarcloud.io" \
+            /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+      - name: Build
+        run: dotnet build --no-incremental
+      - name: Collect coverage
+        run: dotnet-coverage collect "dotnet test" -f xml -o coverage.xml
+      - name: SonarCloud end
+        run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

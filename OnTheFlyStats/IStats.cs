@@ -25,6 +25,6 @@ namespace OnTheFlyStats
         TT Normalize(TT value);
         void Reset();
 
-        string PrettyPrint(string title = "Descriptive statistics calculation result", int lineLength = 60, CultureInfo culture = null);
+        string PrettyPrint(string title = "Descriptive statistics calculation result", int lineLength = 60, CultureInfo? culture = null);
     }
 }
