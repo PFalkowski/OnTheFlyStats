@@ -1,4 +1,4 @@
-# OnTheFlyStats
+﻿# OnTheFlyStats
 
 [![CI](https://github.com/PFalkowski/OnTheFlyStats/actions/workflows/ci.yml/badge.svg)](https://github.com/PFalkowski/OnTheFlyStats/actions/workflows/ci.yml)
 [![NuGet version](https://img.shields.io/nuget/v/OnTheFlyStats.svg)](https://www.nuget.org/packages/OnTheFlyStats/)
@@ -9,6 +9,12 @@
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support-yellow.svg)](https://www.buymeacoffee.com/piotrfalkowski)
 
 One-pass (O(N)) descriptive statistics. Statistics are always ready and O(1) to retrieve — no recalculation needed.
+
+## Install
+
+```bash
+dotnet add package OnTheFlyStats
+```
 
 ## Statistics
 
