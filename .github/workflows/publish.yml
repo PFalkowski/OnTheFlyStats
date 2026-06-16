@@ -1,0 +1,31 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6
+      - name: Setup .NET
+        uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2  # v5
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Pack
+        run: dotnet pack --configuration Release --no-build --output ./nupkg
+      - name: Login to NuGet
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841  # v1
+        with:
+          usernameVar: NUGET_USER
+          tokenVar: NUGET_TOKEN
+      - name: Push to NuGet
+        run: dotnet nuget push ./nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate

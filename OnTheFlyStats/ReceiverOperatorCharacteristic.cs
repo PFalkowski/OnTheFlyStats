@@ -148,9 +148,9 @@ namespace OnTheFlyStats
         /// <summary>
         ///     Register new observation and classifier prediction.
         /// </summary>
-        /// <param name="expected">Value predicted by the model.</param>
-        /// <param name="actual">Value from the data.</param>
-        /// <param name="threshold"></param>
+        /// <param name="real">Expected (actual) value from the data.</param>
+        /// <param name="predicted">Value predicted by the model.</param>
+        /// <param name="threshold">Classification threshold (default 0.5).</param>
         public virtual void Activate(double real, double predicted, double threshold = 0.5)
         {
             Activate(real > threshold, predicted > threshold);
